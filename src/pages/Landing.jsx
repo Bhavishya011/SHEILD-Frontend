@@ -124,12 +124,17 @@ export default function Landing() {
             <a href="#how" className="nav-link">How it Works</a>
             <a href="#stats" className="nav-link">Impact</a>
           </div>
-          <button
-            onClick={() => navigate('/login')}
-            className="nav-cta"
-          >
-            Sign In <ArrowRight size={14} />
-          </button>
+          <div className="nav-actions flex items-center gap-4">
+            <a href="/sos" className="text-xs font-semibold text-red-400 hover:text-red-300 transition-colors uppercase tracking-wider">
+              Simulate SOS
+            </a>
+            <button
+              onClick={() => navigate('/login')}
+              className="nav-cta"
+            >
+              Sign In <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -167,9 +172,12 @@ export default function Landing() {
               Enter Command Center
               <ChevronRight size={18} />
             </button>
-            <a href="#features" className="btn-ghost">
-              See how it works
-            </a>
+            <button 
+              onClick={() => navigate('/sos')} 
+              className="btn-ghost"
+            >
+              Simulate Guest SOS
+            </button>
           </div>
 
           <div className="hero-tags">
