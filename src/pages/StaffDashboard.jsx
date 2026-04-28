@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Shield, ToggleLeft, ToggleRight, MapPin, Radio } from 'lucide-react';
+import { Shield, ToggleLeft, ToggleRight, MapPin, Radio, LogOut } from 'lucide-react';
 import TaskCard from '../components/TaskCard';
 import AlertBanner from '../components/AlertBanner';
 import { listenToPath, updateTask, updateStaff } from '../lib/firebase';
 
-export default function StaffDashboard({ user }) {
+export default function StaffDashboard({ user, onLogout }) {
   const [tasks, setTasks] = useState([]);
   const [incidents, setIncidents] = useState([]);
   const [available, setAvailable] = useState(true);
@@ -85,6 +85,13 @@ export default function StaffDashboard({ user }) {
             <span className={`text-xs font-semibold ${available ? 'text-green-400' : 'text-slate-500'}`}>
               {available ? 'Available' : 'Busy'}
             </span>
+          </button>
+          <button
+            onClick={onLogout}
+            title="Sign Out"
+            className="w-9 h-9 flex items-center justify-center rounded-xl glass text-slate-500 hover:text-red-400 hover:border-red-500/20 transition-all duration-200"
+          >
+            <LogOut size={16} />
           </button>
         </div>
 

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import GuestSOS from './pages/GuestSOS';
 import StaffDashboard from './pages/StaffDashboard';
@@ -35,6 +36,11 @@ function AppRoutes() {
 
   return (
     <Routes>
+      {/* Landing */}
+      <Route path="/" element={
+        user ? <Navigate to={user.role === 'manager' ? '/manager' : '/staff'} replace /> : <Landing />
+      } />
+
       {/* Public */}
       <Route path="/sos" element={<GuestSOS />} />
       <Route path="/login" element={
@@ -44,7 +50,7 @@ function AppRoutes() {
       {/* Protected — Staff */}
       <Route path="/staff" element={
         <ProtectedRoute user={user} role="staff">
-          <StaffDashboard user={user} />
+          <StaffDashboard user={user} onLogout={handleLogout} />
         </ProtectedRoute>
       } />
 
@@ -56,7 +62,7 @@ function AppRoutes() {
       } />
 
       {/* Default redirect */}
-      <Route path="*" element={<Navigate to={user ? (user.role === 'manager' ? '/manager' : '/staff') : '/login'} replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
